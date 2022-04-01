@@ -1,4 +1,6 @@
 credentials = {}
+salt = "adsf"
+
 
 def hash(in_str):
     search_str = "abcdefghijklmnopqrstuvwxyz"
@@ -17,14 +19,14 @@ def main():
             password = input("password: ")
             if username not in credentials:
                 print("User does not exist")
-            elif credentials[username] == hash(password):
+            elif credentials[username] == hash(password+salt):
                 print("success")
             else:
                 print("failed")
         elif choice == "2":
             username = input("username: ")
             password = input("password: ")
-            credentials[username] = hash(password)
+            credentials[username] = hash(password+salt)
         else:
             print("error")
 
