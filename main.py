@@ -1,6 +1,5 @@
 credentials = {}
 
-
 def hash(in_str):
     search_str = "abcdefghijklmnopqrstuvwxyz"
     sum = 0
