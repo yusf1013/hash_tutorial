@@ -1,8 +1,9 @@
-import random
+import random, bcrypt
 
 credentials = {}
-salt = "adsf"
+salt = bcrypt.gensalt()
 search_str = "abcdefghijklmnopqrstuvwxyz"
+# s = bcrypt.gensalt()
 
 
 def hash(in_str):
@@ -29,16 +30,18 @@ def main():
             password = input("password: ")
             if username not in credentials:
                 print("User does not exist")
-            elif match_password(password, credentials[username]):
+            elif bcrypt.checkpw(bytes(password, encoding='utf-8'), credentials[username]):
                 print("success")
             else:
                 print("failed")
         elif choice == "2":
             username = input("username: ")
             password = input("password: ")
-            pepper = random.choice(search_str)
-            print(pepper)
-            credentials[username] = hash(password+salt+pepper)
+            # pepper = random.choice(search_str)
+            # print(pepper)
+            # hashed = bcrypt.hashpw(bytes(password, encoding='utf-8'), s)
+            # credentials[username] = hash(password+salt+pepper)
+            credentials[username] = bcrypt.hashpw(bytes(password, encoding='utf-8'), salt)
         else:
             print("error")
 
